@@ -1,41 +1,4 @@
-#include "libraries.hpp"
-
-string file = "text.txt";
-
-struct point
-{
-    int x;
-    int y;
-    int z;
-};
-
-class Polygon
-{
-    point v[3];
-    
-public:
-    
-    Polygon(int coordinates [3][3])
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            this->v[i].x = coordinates[i][0];
-            this->v[i].y = coordinates[i][1];
-            this->v[i].z = coordinates[i][2];
-        }
-    }
-};
-
-
-class Object
-{
-    vector<Polygon> poligons;
-    
-public:
-    Object() {poligons.resize(0);}
-    void readFile();
-};
-
+#include "classObject.hpp"
 
 void Object::readFile()
 {

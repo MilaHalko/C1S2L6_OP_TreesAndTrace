@@ -1,13 +1,8 @@
-//
-//  structPoint.hpp
-//  Trees&BeamTracing
-//
-//  Created by Mila on 21.05.2021.
-//
+#pragma once
 
-#ifndef structPoint_hpp
-#define structPoint_hpp
-
-#include <stdio.h>
-
-#endif /* structPoint_hpp */
+struct point
+{
+    int x;
+    int y;
+    int z;
+};
