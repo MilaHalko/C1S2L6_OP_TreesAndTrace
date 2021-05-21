@@ -28,11 +28,9 @@
 		217A0672265707D400C9951F /* Trees&BeamTracing */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Trees&BeamTracing"; sourceTree = BUILT_PRODUCTS_DIR; };
 		217A0675265707D400C9951F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		217A067D2657081300C9951F /* classObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = classObject.cpp; sourceTree = "<group>"; };
-		217A067E2657081300C9951F /* classObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = classObject.hpp; sourceTree = "<group>"; };
 		217A06822657241200C9951F /* libraries.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = libraries.hpp; sourceTree = "<group>"; };
-		217A06872657247100C9951F /* structPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = structPoint.hpp; sourceTree = "<group>"; };
-		217A068C265724F900C9951F /* classPolygon.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = classPolygon.hpp; sourceTree = "<group>"; };
 		217A06922657280500C9951F /* classPolygon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = classPolygon.cpp; sourceTree = "<group>"; };
+		217A06972657B59B00C9951F /* OBJ_classes.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OBJ_classes.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,11 +64,9 @@
 			isa = PBXGroup;
 			children = (
 				217A0675265707D400C9951F /* main.cpp */,
-				217A067E2657081300C9951F /* classObject.hpp */,
+				217A06972657B59B00C9951F /* OBJ_classes.hpp */,
 				217A067D2657081300C9951F /* classObject.cpp */,
-				217A068C265724F900C9951F /* classPolygon.hpp */,
 				217A06922657280500C9951F /* classPolygon.cpp */,
-				217A06872657247100C9951F /* structPoint.hpp */,
 				217A06822657241200C9951F /* libraries.hpp */,
 			);
 			path = "Trees&BeamTracing";

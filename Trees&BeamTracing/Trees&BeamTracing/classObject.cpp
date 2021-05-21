@@ -1,8 +1,10 @@
-#include "classObject.hpp"
+#include "OBJ_classes.hpp"
+
+Object::Object() {poligons.resize(0);}
 
 void Object::readFile()
 {
-    ifstream fin (file);
+    ifstream fin ("Sphere.objм");
     
     if (!fin) cout << "Error!" << endl;
     else
@@ -13,32 +15,41 @@ void Object::readFile()
             str = "";
             getline(fin, str);
             
-            if (str.find("f ") == 1)
+            if (str.find("f ") == 0)
             {
-                string number = " ";
-                int coordinates [3][3];
-                int vertice = 0;
-                int exis = 0;
+                string number = "";
+                vector<int> coordinates;
+                coordinates.resize(0);
                 
                 for (int i = 0; i < str.size(); i++)
                 {
-                    while (isnumber(str[i]))
+                    while (isnumber(str[i])  ||  str[i] == '.'  ||  str[i] == '-')
                     {
                         number += str[i];
                         i++;
                     }
                     
-                    if (number != " ")
+                    if (number != "")
                     {
-                        coordinates[vertice][exis] = stoi(number);
-                        vertice++;
-                        exis++;
+                        coordinates.push_back(stoi(number));
                         number = "";
                     }
                 }
-                poligons.push_back(coordinates);
+                Polygon newPoly (coordinates);
+                poligons.push_back(newPoly);
             }
         }
         fin.close();
+    }
+}
+
+void Object::print()        // проверОчка
+{
+    for (int i = 0; i < poligons.size(); i++) {
+        for (int j = 0; j < 3; j++) {
+            cout << poligons[i].v[j].x << "/" << poligons[i].v[j].y << "/" << poligons[i].v[j].z;
+            cout << " ";
+        }
+        cout << endl;
     }
 }
