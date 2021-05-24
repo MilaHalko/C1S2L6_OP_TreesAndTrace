@@ -3,17 +3,17 @@
 #include <iostream>
 #include <vector>
 #include "Triangle.h"
+#include "Ray.h"
 using namespace std;
 
-class Area
+class Area 
 {
-	vector<int> pointMax;
-	vector<int> pointMin;
+    vector<int> pointMax;
+    vector<int> pointMin;
 public:
-	int count = 0;
+    int count = 0;
 
-	void addToArea(Triangle* newData);
-	bool isInArea(Ray ray);
-	float distToArea(Triangle* from);
+    void addToArea(Triangle* newData);
+    bool isInArea(Ray ray);
 };
 
