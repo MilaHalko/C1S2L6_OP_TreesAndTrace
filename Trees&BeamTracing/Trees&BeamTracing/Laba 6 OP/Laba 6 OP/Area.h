@@ -15,5 +15,6 @@ public:
 
     void addToArea(Triangle* newData);
     bool isInArea(Ray ray);
+    float distToArea(Triangle* from);
 };
 
