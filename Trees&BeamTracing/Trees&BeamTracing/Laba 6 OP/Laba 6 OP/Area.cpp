@@ -36,7 +36,7 @@ bool Area::isInArea(Ray ray)
     {
         for (int j = 0; j < 3; j++)
         {
-            if (minT[i] > maxT[j]) 
+            if (minT[i] >= maxT[j]) 
             {
                 flag = false;
             }

@@ -12,4 +12,5 @@ public:
 
     Ray(int x0, int y0, int z0, int a, int b, int c);
 
+    vector<int> pointInZ(int z);
 };

@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 #include "Triangle.h"
-#include "Ray.h"
 using namespace std;
 
 class Area 
