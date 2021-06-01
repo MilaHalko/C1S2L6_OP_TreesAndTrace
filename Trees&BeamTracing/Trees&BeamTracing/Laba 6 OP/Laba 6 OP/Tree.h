@@ -1,7 +1,8 @@
 #pragma once
+#include <stdio.h>
 #include "Node.h"
 
-class Tree 
+class Tree
 {
     Node root;
     float findInNode(Ray ray, Node* node);

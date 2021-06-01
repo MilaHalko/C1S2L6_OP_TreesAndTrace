@@ -1,10 +1,11 @@
 #pragma once
+#include <stdio.h>
 #include <iostream>
 #include <vector>
 #include "Triangle.h"
 using namespace std;
 
-class Area
+class Area 
 {
     Point pointMax;
     Point pointMin;

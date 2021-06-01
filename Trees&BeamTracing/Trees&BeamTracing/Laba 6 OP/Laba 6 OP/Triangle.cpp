@@ -9,7 +9,8 @@
                           dest[1] = v1[1] - v2[1]; \
                           dest[2] = v1[2] - v2[2];
 
-int Triangle::intersect_triangle(Ray ray) {
+int Triangle::intersect_triangle(Ray ray) 
+{
     double edge1[3], edge2[3], tvec[3], pvec[3], qvec[3];
     double det, inv_det;
     double u, v;
@@ -59,8 +60,9 @@ float Triangle::getColor()
 
 
 
-float Triangle::getMax(int numCoor) {
-    if ((point1[numCoor] > point2[numCoor]) && (point1[numCoor] > point3[numCoor])) 
+float Triangle::getMax(int numCoor)
+{
+    if ((point1[numCoor] > point2[numCoor]) && (point1[numCoor] > point3[numCoor]))
     {
         return point1[numCoor];
     }
@@ -74,12 +76,13 @@ float Triangle::getMax(int numCoor) {
     }
 }
 
-float Triangle::getMin(int numCoor) {
+float Triangle::getMin(int numCoor) 
+{
     if ((point1[numCoor] < point2[numCoor]) && (point1[numCoor] < point3[numCoor])) 
     {
         return point1[numCoor];
     }
-    else if (point2[numCoor] < point3[numCoor]) 
+    else if (point2[numCoor] < point3[numCoor])
     {
         return point2[numCoor];
     }

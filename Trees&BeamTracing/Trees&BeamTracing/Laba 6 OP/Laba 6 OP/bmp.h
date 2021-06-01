@@ -1,9 +1,11 @@
+#pragma once
 #include <fstream>
 #include <string>
 #include <filesystem>
 
 using namespace std;
 
+#pragma pack(push, 1)
 typedef struct 
 {
     int8_t id;
@@ -24,15 +26,18 @@ typedef struct
     int32_t biClrUsed;       // Для індексованих зображень, можна поставити 0L
     int32_t biClrImportant;  // Те саме
 } BMPHEAD;
+#pragma pack(pop)
 
+#pragma pack(push, 1)
 typedef struct 
 {
     uint8_t redComponent;
     uint8_t greenComponent;
     uint8_t blueComponent;
 } PIXELDATA;
+#pragma pack(pop)
 
-class bmpWriter 
+class bmpWriter
 {
 private:
     BMPHEAD header;
