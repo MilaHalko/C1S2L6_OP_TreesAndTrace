@@ -2,7 +2,6 @@
 
 class Tree 
 {
-
     Node root;
     float findInNode(Ray ray, Node* node);
     void addToNode(Triangle* newTriangle, Node* node);

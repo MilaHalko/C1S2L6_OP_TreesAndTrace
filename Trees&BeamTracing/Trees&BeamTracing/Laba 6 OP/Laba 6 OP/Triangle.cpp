@@ -1,97 +1,90 @@
 #include "Triangle.h"
 
-Triangle::Triangle(int x1, int y1, int z1, int x2, int y2, int z2, int x3, int y3, int z3, float cosAlpha) 
+#define EPSILON 0.0000001
+#define CROSS(dest, v1, v2) dest[0] = v1[1] * v2[2] - v1[2] * v2[1]; \
+                            dest[1] = v1[2] * v2[0] - v1[0] * v2[2]; \
+                            dest[2] = v1[0] * v2[1] - v1[1] * v2[0];
+#define DOT(v1, v2) (v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2])
+#define SUB(dest, v1, v2) dest[0] = v1[0] - v2[0]; \
+                          dest[1] = v1[1] - v2[1]; \
+                          dest[2] = v1[2] - v2[2];
+
+int Triangle::intersect_triangle(Ray ray) {
+    double edge1[3], edge2[3], tvec[3], pvec[3], qvec[3];
+    double det, inv_det;
+    double u, v;
+
+    SUB(edge1, point2, point1);
+    SUB(edge2, point3, point1);
+
+    CROSS(pvec, ray.directionVector, edge2);
+
+    det = DOT(edge1, pvec);
+
+    if (det > -EPSILON && det < EPSILON) 
+    {
+        return 0;
+    }
+
+    inv_det = 1.0 / det;
+
+    SUB(tvec, ray.stPoint, point1);
+
+    u = DOT(tvec, pvec) * inv_det;
+    if (u < 0.0 || u > 1.0)
+        return 0;
+
+    CROSS(qvec, tvec, edge1);
+
+    v = DOT(ray.directionVector, qvec) * inv_det;
+    if (v < 0.0 || u + v > 1.0)
+        return 0;
+
+    return 1;
+}
+
+Triangle::Triangle(float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3, float cosAlpha)
 {
-    point1.push_back(x1);
-    point1.push_back(y1);
-    point1.push_back(z1);
-    point2.push_back(x2);
-    point2.push_back(y2);
-    point2.push_back(z2);
-    point3.push_back(x3);
-    point3.push_back(y3);
-    point3.push_back(z3);
+    point1 = { x1, y1, z1 };
+    point2 = { x2, y2, z2 };
+    point3 = { x3, y3, z3 };
     color = cosAlpha;
 }
 
-float Triangle::getColor() { return color; }
-
-int Triangle::getMax(int numCoor) {
-    if ((point1[numCoor] > point2[numCoor]) && (point1[numCoor] > point2[numCoor])) {
-        return point1[numCoor];
-    }
-    else if (point2[numCoor] > point3[numCoor]) {
-        return point2[numCoor];
-    }
-    else {
-        return point3[numCoor];
-    }
-}
-
-int Triangle::getMin(int numCoor) {
-    if ((point1[numCoor] < point2[numCoor]) && (point1[numCoor] < point2[numCoor])) {
-        return point1[numCoor];
-    }
-    else if (point2[numCoor] < point3[numCoor]) {
-        return point2[numCoor];
-    }
-    else {
-        return point3[numCoor];
-    }
-}
-
-bool Triangle::isInTriangle(Ray ray) 
+float Triangle::getColor() 
 {
-    vector<Ray> altRay;
-    vector<vector<int>> triangleIn2d;
-    vector<int> pointInXoY;
-    if ((point1[2] != point2[2]) || (point2[2] != point3[2])) 
+    return color;
+}
+
+
+
+
+float Triangle::getMax(int numCoor) {
+    if ((point1[numCoor] > point2[numCoor]) && (point1[numCoor] > point3[numCoor])) 
     {
-        altRay.push_back(Ray(point1[0], point1[1], point1[2], ray.directionVector[0], ray.directionVector[1], ray.directionVector[2]));
-        altRay.push_back(Ray(point2[0], point2[1], point2[2], ray.directionVector[0], ray.directionVector[1], ray.directionVector[2]));
-        altRay.push_back(Ray(point3[0], point3[1], point3[2], ray.directionVector[0], ray.directionVector[1], ray.directionVector[2]));
-        for (int i = 0; i < 3; i++) 
-        {
-            triangleIn2d.push_back(altRay[i].pointInZ(0));
-        }
-        pointInXoY = ray.pointInZ(0);
+        return point1[numCoor];
+    }
+    else if (point2[numCoor] > point3[numCoor]) 
+    {
+        return point2[numCoor];
     }
     else 
     {
-        vector<int> temp = { point1[0], point1[1] };
-        triangleIn2d.push_back(temp);
-        temp = { point2[0], point2[1] };
-        triangleIn2d.push_back(temp);
-        temp = { point3[0], point3[1] };
-        triangleIn2d.push_back(temp);
-        pointInXoY = ray.pointInZ(point1[2]);
+        return point3[numCoor];
     }
-    return isIn2dTriangle(triangleIn2d, pointInXoY);
 }
 
-bool Triangle::isIn2dTriangle(vector<vector<int>> trianglePoints, vector<int> findPoint)
-{
-    trianglePoints.push_back(trianglePoints[0]);
-    trianglePoints.push_back(trianglePoints[1]);
-    float k1 = 0; float k2 = 0;
-    bool isIn = true;
-    for (int i = 0; i < 3; i++) {
-        if ((trianglePoints[i + 1][0] - trianglePoints[i][0]) != 0) {
-            k1 += (findPoint[0] - trianglePoints[i][0]) / (trianglePoints[i + 1][0] - trianglePoints[i][0]);
-        }
-        if ((trianglePoints[i + 1][1] - trianglePoints[i][1]) != 0) {
-            k1 += (findPoint[1] - trianglePoints[i][1]) / (trianglePoints[i + 1][1] - trianglePoints[i][1]);
-        }
-        if ((trianglePoints[i + 1][0] - trianglePoints[i][0]) != 0) {
-            k2 += (trianglePoints[i + 2][0] - trianglePoints[i][0]) / (trianglePoints[i + 1][0] - trianglePoints[i][0]);
-        }
-        if ((trianglePoints[i + 1][1] - trianglePoints[i][1]) != 0) {
-            k2 += (trianglePoints[i + 2][1] - trianglePoints[i][1]) / (trianglePoints[i + 1][1] - trianglePoints[i][1]);
-        }
-        if (k1 * k2 <= 0) 
-        {
-            isIn = false;
-        }
+float Triangle::getMin(int numCoor) {
+    if ((point1[numCoor] < point2[numCoor]) && (point1[numCoor] < point3[numCoor])) 
+    {
+        return point1[numCoor];
     }
-    return isIn;
+    else if (point2[numCoor] < point3[numCoor]) 
+    {
+        return point2[numCoor];
+    }
+    else 
+    {
+        return point3[numCoor];
+    }
 }

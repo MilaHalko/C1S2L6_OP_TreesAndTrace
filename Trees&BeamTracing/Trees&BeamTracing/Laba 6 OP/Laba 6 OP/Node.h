@@ -1,5 +1,4 @@
-#pragma once
-
+#include <stdio.h>
 #include "Area.h"
 
 class Node 
@@ -7,6 +6,6 @@ class Node
 public:
     Area area;
     Triangle* data;
-    Node* left = nullptr;
-    Node* right = nullptr;
+    Node* left = NULL;
+    Node* right = NULL;
 };

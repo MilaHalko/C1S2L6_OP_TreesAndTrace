@@ -1,20 +1,22 @@
 #include "Area.h"
 
-void Area::addToArea(Triangle* newData) 
+void Area::addToArea(Triangle* newData)
 {
     for (int i = 0; i < 3; i++) 
     {
         if (count == 0) 
         {
-            pointMax.push_back(newData->getMax(i));
-            pointMin.push_back(newData->getMin(i));
+            pointMax[i] = newData->getMax(i);
+            pointMin[i] = newData->getMin(i);
         }
         else 
         {
-            if (newData->getMax(i) > pointMax[i]) {
+            if (newData->getMax(i) > pointMax[i])
+            {
                 pointMax[i] = newData->getMax(i);
             }
-            if (newData->getMin(i) < pointMin[i]) {
+            if (newData->getMin(i) < pointMin[i])
+            {
                 pointMin[i] = newData->getMin(i);
             }
         }
@@ -26,24 +28,43 @@ bool Area::isInArea(Ray ray)
 {
     vector<float> minT;
     vector<float> maxT;
-    for (int i = 0; i < 3; i++) 
-    {
-        minT.push_back((pointMin[i] - ray.stPoint[i]) / ray.directionVector[i]);
-        maxT.push_back((pointMax[i] - ray.stPoint[i]) / ray.directionVector[i]);
-    }
     bool flag = true;
     for (int i = 0; i < 3; i++) 
     {
-        for (int j = 0; j < 3; j++)
+        if (ray.directionVector[i] > 0) 
         {
-            if (minT[i] >= maxT[j]) 
+            minT.push_back((pointMin[i] - ray.stPoint[i]) / ray.directionVector[i]);
+            maxT.push_back((pointMax[i] - ray.stPoint[i]) / ray.directionVector[i]);
+        }
+        else if (ray.directionVector[i] < 0) 
+        {
+            maxT.push_back((pointMin[i] - ray.stPoint[i]) / ray.directionVector[i]);
+            minT.push_back((pointMax[i] - ray.stPoint[i]) / ray.directionVector[i]);
+        }
+        else 
+        {
+            return true;
+        }
+    }
+    for (int i = 0; i < 3; i++) 
+    {
+        for (int j = 0; j < 3; j++) 
+        {
+            if (minT[i] > maxT[j]) 
             {
                 flag = false;
+                return false;
             }
         }
     }
     return flag;
 }
+
+/*
+ x = x0 + at
+ y = y0 + bt
+ z = z0 + ct
+ */
 
 float Area::distToArea(Triangle* from) 
 {
