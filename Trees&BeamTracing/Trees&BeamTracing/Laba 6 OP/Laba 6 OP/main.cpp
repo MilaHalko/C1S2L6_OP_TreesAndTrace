@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Tree.h"
+#include "bmp.h"
 
 int main()
 {
@@ -10,6 +11,8 @@ int main()
     for (int i = 0; i < data.size(); i++) {
         tree.addToTree(&data[i]);
     }
+
+
 
 	system("pause");
 }
