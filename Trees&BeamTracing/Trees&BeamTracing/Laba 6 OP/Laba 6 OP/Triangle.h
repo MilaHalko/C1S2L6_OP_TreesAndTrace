@@ -1,11 +1,13 @@
-#include <stdio.h>
+#pragma once
 #include <iostream>
 #include <vector>
-#include "Ray.h"
+#include "geometry.h"
+using namespace std;
 
 using namespace std;
 
-class Triangle {
+class Triangle
+{
     Point point1, point2, point3; //0-координата х, 1-у, 2-z
     float color;
 public:

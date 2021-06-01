@@ -1,4 +1,4 @@
-#include <stdio.h>
+#pragma once
 #include <iostream>
 #include <vector>
 #include "Triangle.h"
